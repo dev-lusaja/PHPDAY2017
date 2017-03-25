@@ -8,6 +8,15 @@ Requerimientos
 * Docker-compose v.1.9.0
 * Make
 
+
+Configurar dominios de prueba en /etc/hosts
+-------------------------------------------
+
+~~~~
+$ 127.0.0.1 web.dev
+$ 127.0.0.1 api.dev
+~~~~
+
 Instalación de proyecto
 -----------------------
 
