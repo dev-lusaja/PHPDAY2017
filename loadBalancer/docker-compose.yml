@@ -1,0 +1,29 @@
+version: '2'
+services:
+  web:
+    extends:
+      file: ../apps/web/docker-compose.yml
+      service: web
+
+  lb:
+    image: dockercloud/haproxy:1.6.3
+    depends_on:
+      - web
+    links:
+      - web
+    environment:
+      ADDITIONAL_SERVICES: externalapp:api
+      STATS_AUTH: 'phpday:phpday'
+      STATS_PORT: '1936'
+      MONITOR_PORT: '80'
+      MONITOR_URI: '/status'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 80:80
+      - 1936:1936
+
+networks:
+  default:
+    external:
+      name: php_docker
